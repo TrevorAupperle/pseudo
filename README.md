@@ -1,6 +1,20 @@
-# Create T3 App
+# Pseudo
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## What is Pseudo?
+
+In short, our vision for Pseudo was to create an application that would resemble the child of LinkedIn and Stackoverflow. With a primary objective of providing developers with a place to connect with some of the best in the industry, Pseudo aims to embrace the sense of community that has always existed within the software field in a new way. 
+
+Whether you may be looking for insight on your journey to a career in software, or to bounce project ideas off of some of the brightest minds in the industry, Pseudo looks to provide ample opportunity to learn, grow, and make connections with students and professionals alike.
+
+## How is Pseudo structured?
+
+This application is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+
+In order to run the application, you should refer to the following steps:
+
+```CLI
+git clone 
+```
 
 ## What's next? How do I make an app with this?
 
