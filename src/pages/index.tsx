@@ -29,7 +29,7 @@ export type Comment = {
   datePosted: Date;
 };
 
-var posts = await findPosts("title");
+var posts = await findPosts(" ");
 var postsData = posts.data.data;
 
 const mockPosts: Post[] = []
