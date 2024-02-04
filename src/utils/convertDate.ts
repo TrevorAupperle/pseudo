@@ -1,6 +1,7 @@
 export const convertDate = (date: Date): string => {
   const now = new Date();
-  const diff = now.getTime() - date.getTime();
+  const then = new Date(date);
+  const diff = now.getTime() - then.getTime();
   const seconds = Math.floor(diff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
