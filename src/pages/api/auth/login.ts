@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { GET } from "./[auth0]/route";
+import { handleLogin, initAuth0 } from "@auth0/nextjs-auth0";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,8 +7,7 @@ export default async function handler(
 ) {
   try {
     const { email, password } = req.body;
-    await GET("credentials", { email, password });
-
+    await handleLogin(req, res);
     res.status(200).json({ success: true });
   } catch (error: any) {
     if (error.type === "CredentialsSignin") {
