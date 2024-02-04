@@ -48,9 +48,18 @@ export const Navbar = () => {
     <div className="mt-4 flex w-full items-center justify-between rounded-lg border border-gray-200 bg-white px-6 shadow-sm">
       <div className="flex items-center gap-6">
         <div className="flex flex-col items-center py-2">
-          <PseudoLogo className="text-2xl" />
-          {/* <h1 className="font-logo text-primaryBlue font-bold">Pseudo</h1> */}
+          <Link
+            href="/"
+            className={classNames(
+              "border-primaryBlue-300 px-4 py-3 text-gray-400 ",
+            )}
+          >
+            <PseudoLogo className="text-2xl" />
+
+            {/* <h1 className="font-logo text-primaryBlue font-bold">Pseudo</h1> */}
+          </Link>
         </div>
+
         <div className="flex items-center gap-2">
           <Link
             href="/"
@@ -63,7 +72,7 @@ export const Navbar = () => {
             Home
           </Link>
           <Link
-            href="/"
+            href="../questions"
             className={classNames(
               router.pathname === "/questions"
                 ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
@@ -73,7 +82,7 @@ export const Navbar = () => {
             Questions
           </Link>
           <Link
-            href="/"
+            href="../users"
             className={classNames(
               router.pathname === "/users"
                 ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
@@ -83,7 +92,7 @@ export const Navbar = () => {
             Users
           </Link>
           <Link
-            href="/"
+            href="../notifications"
             className={classNames(
               router.pathname === "/notifications"
                 ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
