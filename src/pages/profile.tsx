@@ -4,6 +4,7 @@ import Image from "next/image";
 import React from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
+import { getUserInfo, createUser } from '../utils/api.js';
 
 const Profile: NextPage = () => {
   const defaultPicture =
