@@ -1,7 +1,8 @@
 import Link from "next/link";
-import Lottie from "react-lottie";
 import planet from "public/lotties/planet.json";
 import sun from "public/lotties/sun.json";
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 export const Footer = () => {
   return (
