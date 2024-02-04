@@ -1,24 +1,30 @@
 import mongoose from "mongoose";
 
-
 const UserSchema = new mongoose.Schema({
-  name: {
+  userId: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    immutable: true
+  },
+  name: {
+    type: String,
+    required: false,
+    unique: false
   },
   email: {
     type: String,
-    required: true,
-    unique: true
+    required: false,
+    unique: false
   },
   joinDate: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    immutable: true
   },
   professionalStatus: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false
   },
   interactiveScore: {
@@ -28,7 +34,7 @@ const UserSchema = new mongoose.Schema({
   }, 
   experience: {
     type: String,
-    required: true,
+    required: false,
   }, 
   skills: {
     type: Array,
