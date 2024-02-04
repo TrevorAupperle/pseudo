@@ -1,4 +1,5 @@
 import Head from "next/head";
+import React from "react";
 
 export default function Home() {
   return (
@@ -17,3 +18,15 @@ export default function Home() {
     </>
   );
 }
+
+// Keep incase we need to later  referendce to implement the user profile fetch.
+//
+// import React from "react";
+// import { useUser } from "@auth0/nextjs-auth0/client";
+
+// function index() {
+//   const { user, error, isLoading } = useUser();
+//   return <a href="api/auth/login">Login</a>;
+// }
+
+// export default index;

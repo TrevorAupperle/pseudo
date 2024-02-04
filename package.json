@@ -11,10 +11,13 @@
     "server": "node src\\server\\server.js"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
     "@svgr/webpack": "^8.1.0",
     "@t3-oss/env-nextjs": "^0.7.1",
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
     "@tailwindcss/forms": "^0.5.7",
     "@types/mongoose": "^5.11.97",
     "express": "^4.18.2",
