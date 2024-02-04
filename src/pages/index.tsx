@@ -1,16 +1,9 @@
-import { HeroBanner } from "../components/hero-banner";
-import { PageLayout } from "../components/page-layout";
-import { LoginButton } from "~/components/buttons/login-button";
-import { SignupButton } from "~/components/buttons/signup-button";
+import React from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
-const Home = () => (
-  <PageLayout>
-    <>
-      <SignupButton />
-      <LoginButton />
-      <HeroBanner />
-    </>
-  </PageLayout>
-);
+function index() {
+  const { user, error, isLoading } = useUser();
+  return <a href="api/auth/login">Login</a>;
+}
 
-export default Home;
+export default index;
