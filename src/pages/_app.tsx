@@ -1,9 +1,18 @@
-import { type AppType } from "next/dist/shared/lib/utils";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import "../styles/styles.css";
 
-import "~/styles/globals.css";
+function App({ Component, pageProps }: AppProps) {
+  return (
+    <UserProvider>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Auth0 Next.js Sample</title>
+      </Head>
+      <Component {...pageProps} />
+    </UserProvider>
+  );
+}
 
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
-
-export default MyApp;
+export default App;
