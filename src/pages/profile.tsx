@@ -1,6 +1,7 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
@@ -42,6 +43,14 @@ const Profile: NextPage = () => {
               <div className="profile__headline">
                 <h2 className="profile__title">{user.name}</h2>
                 <span className="profile__description">{user.email}</span>
+              </div>
+              <div className="profile__actions">
+                <Link
+                  href="/api/auth/logout"
+                  className="rounded-sm bg-primaryBlue px-4 py-1 text-white"
+                >
+                  Logout
+                </Link>
               </div>
             </div>
             <div className="profile__details">

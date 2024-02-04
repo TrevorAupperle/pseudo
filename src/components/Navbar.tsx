@@ -4,16 +4,16 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import PseudoLogo from "public/icons/code.svg";
+import PseudoLogo from "../../public/icons/code.svg";
 import { Fragment, useState } from "react";
-import classNames from "~/utils/classNames";
+import classNames from "../utils/classNames";
 import { Transition } from "@headlessui/react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export type NavbarSearchItem = {
   id: string;
   name: string;
 };
-
 const mockSearchItems: NavbarSearchItem[] = [
   { id: "1", name: "John Doe" },
   { id: "2", name: "Jane Doe" },
@@ -39,6 +39,8 @@ const mockSearchItems: NavbarSearchItem[] = [
 
 export const Navbar = () => {
   const router = useRouter();
+  const { user } = useUser();
+
   const [searchValue, setSearchValue] = useState("");
   const [searchBarFocused, setSearchBarFocused] = useState(false);
 
@@ -54,8 +56,8 @@ export const Navbar = () => {
             href="/"
             className={classNames(
               router.pathname === "/"
-                ? "border-primaryBlue text-primaryBlue -mb-[2px] border-b-2 px-6 py-3 font-bold"
-                : "border-primaryBlue-300 hover:text-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2",
+                ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
+                : "border-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2 hover:text-primaryBlue-300",
             )}
           >
             Home
@@ -64,8 +66,8 @@ export const Navbar = () => {
             href="/"
             className={classNames(
               router.pathname === "/questions"
-                ? "border-primaryBlue text-primaryBlue -mb-[2px] border-b-2 px-6 py-3 font-bold"
-                : "border-primaryBlue-300 hover:text-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2",
+                ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
+                : "border-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2 hover:text-primaryBlue-300",
             )}
           >
             Questions
@@ -74,8 +76,8 @@ export const Navbar = () => {
             href="/"
             className={classNames(
               router.pathname === "/users"
-                ? "border-primaryBlue text-primaryBlue -mb-[2px] border-b-2 px-6 py-3 font-bold"
-                : "border-primaryBlue-300 hover:text-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2",
+                ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
+                : "border-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2 hover:text-primaryBlue-300",
             )}
           >
             Users
@@ -84,8 +86,8 @@ export const Navbar = () => {
             href="/"
             className={classNames(
               router.pathname === "/notifications"
-                ? "border-primaryBlue text-primaryBlue -mb-[2px] border-b-2 px-6 py-3 font-bold"
-                : "border-primaryBlue-300 hover:text-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2",
+                ? "-mb-[2px] border-b-2 border-primaryBlue px-6 py-3 font-bold text-primaryBlue"
+                : "border-primaryBlue-300 px-4 py-3 text-gray-400 hover:-mb-[2px] hover:border-b-2 hover:text-primaryBlue-300",
             )}
           >
             Notifications
@@ -101,7 +103,7 @@ export const Navbar = () => {
             type="text"
             id="mainSearch"
             className={classNames(
-              "focus:border-primaryBlue focus:ring-primaryBlue text-primaryBlue block w-full rounded-lg border border-gray-300 bg-gray-100 py-1.5 pl-8 text-sm placeholder:text-sm placeholder:text-gray-400",
+              "block w-full rounded-lg border border-gray-300 bg-gray-100 py-1.5 pl-8 text-sm text-primaryBlue placeholder:text-sm placeholder:text-gray-400 focus:border-primaryBlue focus:ring-primaryBlue",
             )}
             placeholder="Search users and posts..."
             value={searchValue}
@@ -151,10 +153,28 @@ export const Navbar = () => {
             </div>
           </Transition>
         </div>
-        <Link href="/profile">
-          <UserCircleIcon className="text-primaryBlue h-8 w-8" />
-        </Link>
+        {user && (
+          <Link href="/profile">
+            <UserCircleIcon className="h-8 w-8 text-primaryBlue" />
+          </Link>
+        )}
       </div>
+      {!user && (
+        <div className="flex items-center gap-1">
+          <Link
+            href="/api/auth/signup"
+            className="rounded-lg px-4 py-1 text-primaryBlue underline-offset-4 hover:underline"
+          >
+            Sign up
+          </Link>
+          <Link
+            href="/api/auth/login"
+            className="rounded-lg bg-primaryBlue px-4 py-1 text-white"
+          >
+            Log in
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

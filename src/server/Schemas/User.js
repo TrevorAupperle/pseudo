@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { date } from "zod";
+
 
 const UserSchema = new mongoose.Schema({
   name: {
