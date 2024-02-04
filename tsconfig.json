@@ -27,7 +27,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+
+    /* Added */
+    "noImplicitAny": false
   },
   "include": [
     ".eslintrc.cjs",

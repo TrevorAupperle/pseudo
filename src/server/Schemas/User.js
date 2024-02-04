@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { date } from "zod";
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -10,6 +11,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true
+  },
+  joinDate: {
+    type: Date,
+    default: Date.now
   },
   professionalStatus: {
     type: Boolean,
@@ -34,4 +39,4 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
-module.exports = User;
+export default User;
