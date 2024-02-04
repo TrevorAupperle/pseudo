@@ -4,16 +4,16 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import PseudoLogo from "public/icons/code.svg";
+import PseudoLogo from "../../public/icons/code.svg";
 import { Fragment, useState } from "react";
-import classNames from "~/utils/classNames";
+import classNames from "../utils/classNames";
 import { Transition } from "@headlessui/react";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export type NavbarSearchItem = {
   id: string;
   name: string;
 };
-
 const mockSearchItems: NavbarSearchItem[] = [
   { id: "1", name: "John Doe" },
   { id: "2", name: "Jane Doe" },
@@ -39,6 +39,8 @@ const mockSearchItems: NavbarSearchItem[] = [
 
 export const Navbar = () => {
   const router = useRouter();
+  const { user } = useUser();
+
   const [searchValue, setSearchValue] = useState("");
   const [searchBarFocused, setSearchBarFocused] = useState(false);
 
@@ -151,24 +153,28 @@ export const Navbar = () => {
             </div>
           </Transition>
         </div>
-        {/* <Link href="/profile">
-          <UserCircleIcon className="text-primaryBlue h-8 w-8" />
-        </Link> */}
+        {user && (
+          <Link href="/profile">
+            <UserCircleIcon className="h-8 w-8 text-primaryBlue" />
+          </Link>
+        )}
+      </div>
+      {!user && (
         <div className="flex items-center gap-1">
           <Link
-            href="/signup"
+            href="/api/auth/signup"
             className="rounded-lg px-4 py-1 text-primaryBlue underline-offset-4 hover:underline"
           >
             Sign up
           </Link>
           <Link
-            href="/login"
+            href="/api/auth/login"
             className="rounded-lg bg-primaryBlue px-4 py-1 text-white"
           >
             Log in
           </Link>
         </div>
-      </div>
+      )}
     </div>
   );
 };
