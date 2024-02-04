@@ -10,11 +10,20 @@
  *
  */
 
+const educationSelections: ListboxItem[] = [
+  { name: "High School" },
+  { name: "Some College" },
+  { name: "Associates Degree" },
+  { name: "Bachelors Degree" },
+  { name: "Masters Degree" },
+  { name: "PhD Degree" },
+];
+
 import { useState } from "react";
 import { TextField, type TextFieldData } from "./TextField";
 import { validateEmail, validateName, validatePhone } from "~/utils/validation";
 import formatPhoneNumber from "~/utils/formatPhone";
-import Select from "./Select";
+import { Listbox, type ListboxItem } from "./Listbox";
 
 export const NewUserForm = () => {
   const [firstName, setFirstName] = useState<TextFieldData>({
@@ -30,14 +39,7 @@ export const NewUserForm = () => {
     value: "",
     optional: true,
   });
-  const educationSelections = [
-    "High School",
-    "Some College",
-    "Associates Degree",
-    "Bachelors Degree",
-    "Masters Degree",
-    "PhD Degree",
-  ];
+  const [education, setEducation] = useState<ListboxItem>({ name: "" });
 
   return (
     <form className="grid grid-cols-12 gap-2">
@@ -79,10 +81,12 @@ export const NewUserForm = () => {
         className="col-span-4 col-start-1"
       />
       <div></div>
-      <Select
-        title="Education"
-        options={educationSelections}
-        key="EducationSelection"
+      <Listbox
+        id="education"
+        label="Education"
+        items={educationSelections}
+        selected={education}
+        setSelected={setEducation}
         className="col-span-4 col-start-1"
       />
     </form>
