@@ -5,7 +5,7 @@ var router = express.Router();
 
 // Used to search for Post in database
 //      name: name of user
-router.get(`/find`, async (req, res) => {
+router.post(`/find`, async (req, res) => {
 
     //validate request body
     if (req.body.query)
