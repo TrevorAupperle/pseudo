@@ -1,14 +1,14 @@
 import Head from "next/head";
 import rocket from "public/lotties/rocket.json";
+import { PostCard } from "~/components/Post";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { EyeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
-import { convertDate } from "~/utils/convertDate";
-import { ChevronDoubleUpIcon } from "@heroicons/react/20/solid";
-
+import { useState } from "react";
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
-type Post = {
+export type Post = {
+  id: string;
   title: string;
   body: string;
   author: string;
@@ -21,14 +21,15 @@ type Post = {
   professionalForum: Comment[];
 };
 
-type Comment = {
+export type Comment = {
   text: string;
   author: string;
   datePosted: Date;
 };
-
+// sort on views
 const mockPosts: Post[] = [
   {
+    id: "1",
     title: "How to get started with React",
     body: "React is a JavaScript library for building user interfaces. Learn what React is all about on the official website.",
     author: "John Doe",
@@ -47,6 +48,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "2",
     title: "TypeScript Type Assertions and Type Guards",
     body: "This is a mock post about Mastering Generics in TypeScript...",
     author: "Pat Myback",
@@ -60,6 +62,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "3",
     title: "TypeScript in Node.js: Best Practices",
     body: "This is a mock post about Building a REST API with TypeScript and Express...",
     author: "Chris P. Bacon",
@@ -73,6 +76,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "4",
     title: "Effective TypeScript: Tips and Tricks",
     body: "This is a mock post about Migrating to TypeScript: A Step-by-Step Guide...",
     author: "Robin Banks",
@@ -86,6 +90,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "5",
     title: "TypeScript and Vue: Building Robust Applications",
     body: "This is a mock post about TypeScript Type Assertions and Type Guards...",
     author: "Chris P. Bacon",
@@ -99,6 +104,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "6",
     title: "Understanding TypeScript for Beginners",
     body: "This is a mock post about TypeScript Type Assertions and Type Guards...",
     author: "Chris P. Bacon",
@@ -112,6 +118,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "7",
     title: "TypeScript and React: A Comprehensive Guide",
     body: "This is a mock post about TypeScript and React: A Comprehensive Guide...",
     author: "Pat Myback",
@@ -125,6 +132,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "8",
     title: "TypeScript and Webpack: A Developer's Guide",
     body: "This is a mock post about Effective TypeScript: Tips and Tricks...",
     author: "Terry Aki",
@@ -138,6 +146,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "9",
     title: "TypeScript and Vue: Building Robust Applications",
     body: "This is a mock post about TypeScript and React: A Comprehensive Guide...",
     author: "Pat Myback",
@@ -151,6 +160,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "10",
     title: "TypeScript Type Assertions and Type Guards",
     body: "This is a mock post about Building a REST API with TypeScript and Express...",
     author: "Chris P. Bacon",
@@ -163,6 +173,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "11",
     title: "TypeScript and Webpack: A Developer's Guide",
     body: "This is a mock post about Optimizing TypeScript Applications for Performance...",
     author: "Terry Aki",
@@ -181,6 +192,7 @@ const mockPosts: Post[] = [
   },
 
   {
+    id: "12",
     title: "Organizing Projects with TypeScript Namespaces",
     body: "This is a mock post about Understanding TypeScript for Beginners...",
     author: "Pat Myback",
@@ -193,6 +205,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "13",
     title: "TypeScript and React: A Comprehensive Guide",
     body: "This is a mock post about TypeScript and Async/Await: Writing Asynchronous Code...",
     author: "Sam O'Nella",
@@ -205,6 +218,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "14",
     title: "Optimizing TypeScript Applications for Performance",
     body: "This is a mock post about TypeScript in Node.js: Best Practices...",
     author: "Pat Myback",
@@ -217,6 +231,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "15",
     title: "Mastering Generics in TypeScript",
     body: "This is a mock post about TypeScript Type Assertions and Type Guards...",
     author: "Terry Aki",
@@ -229,6 +244,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "16",
     title: "TypeScript in Node.js: Best Practices",
     body: "This is a mock post about TypeScript and Webpack: A Developer's Guide...",
     author: "Terry Aki",
@@ -241,6 +257,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "17",
     title: "TypeScript in Node.js: Best Practices",
     body: "This is a mock post about TypeScript Type Assertions and Type Guards...",
     author: "Pat Myback",
@@ -253,6 +270,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "18",
     title: "TypeScript in Node.js: Best Practices",
     body: "This is a mock post about Organizing Projects with TypeScript Namespaces...",
     author: "Robin Banks",
@@ -265,6 +283,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "19",
     title: "TypeScript Enums and Union Types Explained",
     body: "This is a mock post about TypeScript and Async/Await: Writing Asynchronous Code...",
     author: "Robin Banks",
@@ -277,6 +296,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "20",
     title: "TypeScript and Webpack: A Developer's Guide",
     body: "This is a mock post about Optimizing TypeScript Applications for Performance...",
     author: "Pat Myback",
@@ -289,6 +309,7 @@ const mockPosts: Post[] = [
     professionalForum: [],
   },
   {
+    id: "21",
     title: "Functional Programming in TypeScript",
     body: "This is a mock post about TypeScript and Webpack: A Developer's Guide...",
     author: "Robin Banks",
@@ -300,9 +321,11 @@ const mockPosts: Post[] = [
     communityForum: [],
     professionalForum: [],
   },
-];
+].sort((a, b) => b.views - a.views);
 
 export default function Home() {
+  const [hoverPostId, setHoverPostId] = useState<string>("");
+
   return (
     <>
       <Head>
@@ -343,63 +366,33 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="col-span-8 rounded-lg border border-gray-200 bg-white px-6 py-2 shadow-sm">
-          <h2 className="text-xl font-semibold">Top Questions</h2>
-          <div className="flex flex-col divide-y-2">
-            {mockPosts.map((post, idx) => (
-              <Link
-                href="/post/id"
-                key={idx}
-                className="flex flex-col gap-3 py-2"
-              >
-                <div className="flex flex-col">
-                  <div className="font-semibold text-primaryBlue">
-                    {post.title}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {post.body.substring(
-                      0,
-                      post.body.length > 100 ? 100 : post.body.length,
-                    ) + " ..."}
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <UserCircleIcon className="h-5 w-5 text-primaryBlue" />
-                    <div className="text-sm font-semibold text-primaryBlue">
-                      {post.author}
-                    </div>
-                    <div className="mt-[2px] h-1 w-1 rounded-full bg-gray-500" />
-                    <div className="text-sm text-gray-500">
-                      {"posted " + convertDate(post.datePublished)}
-                    </div>
-                    <div className="mt-[2px] h-1 w-1 rounded-full bg-gray-500" />
-                    {post.dateLastModified !== post.datePublished && (
-                      <div className="text-sm text-gray-500">
-                        {" edited " + convertDate(post.dateLastModified)}
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-1">
-                      <EyeIcon className="h-4 w-4 text-gray-400" />
-                      <div className="text-sm text-gray-500">
-                        {post.views + " views"}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <ChevronDoubleUpIcon className="h-4 w-4 text-primaryGreen" />
-                      <div className="text-sm text-primaryGreen">
-                        {post.impact + " impact"}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+        <div className="col-span-8 flex flex-col items-center gap-2">
+          <div className="w-full rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
+            <h2 className="text-xl font-semibold">Top Questions</h2>
+            <div className="flex flex-col divide-y-2">
+              {mockPosts.map((post, idx) => (
+                <PostCard
+                  key={idx}
+                  data={post}
+                  hoverId={hoverPostId}
+                  setHoverId={setHoverPostId}
+                />
+              ))}
+            </div>
+          </div>
+          <Link
+            href="/questions"
+            className="bg-primaryGreen border-primaryGreen-900 flex items-center gap-2 rounded-lg border px-8 py-2 text-white shadow-sm"
+          >
+            <div>See more</div>
+            <ArrowRightIcon className="h-4 w-4" />
+          </Link>
+        </div>
+        <div className="col-span-4 flex flex-col items-center">
+          <div className="w-full rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
+            <h2 className="text-xl font-semibold">Platform Stats</h2>
           </div>
         </div>
-        <div className="col-span-4 rounded-lg border border-gray-200 bg-white px-6 py-2 shadow-sm"></div>
       </div>
     </>
   );

@@ -167,23 +167,23 @@ export const Navbar = () => {
             <UserCircleIcon className="h-8 w-8 text-primaryBlue" />
           </Link>
         )}
+        {!user && (
+          <div className="flex items-center gap-1">
+            <Link
+              href="/api/auth/signup"
+              className="rounded-lg px-4 py-1 text-primaryBlue underline-offset-4 hover:underline"
+            >
+              Sign up
+            </Link>
+            <Link
+              href="/api/auth/login"
+              className="rounded-lg bg-primaryBlue px-4 py-1 text-white"
+            >
+              Log in
+            </Link>
+          </div>
+        )}
       </div>
-      {!user && (
-        <div className="flex items-center gap-1">
-          <Link
-            href="/api/auth/signup"
-            className="rounded-lg px-4 py-1 text-primaryBlue underline-offset-4 hover:underline"
-          >
-            Sign up
-          </Link>
-          <Link
-            href="/api/auth/login"
-            className="rounded-lg bg-primaryBlue px-4 py-1 text-white"
-          >
-            Log in
-          </Link>
-        </div>
-      )}
     </div>
   );
 };
