@@ -382,7 +382,7 @@ export default function Home() {
           </div>
           <Link
             href="/questions"
-            className="bg-primaryGreen border-primaryGreen-900 flex items-center gap-2 rounded-lg border px-8 py-2 text-white shadow-sm"
+            className="border-primaryGreen-900 flex items-center gap-2 rounded-lg border bg-primaryGreen px-8 py-2 text-white shadow-sm"
           >
             <div>See more</div>
             <ArrowRightIcon className="h-4 w-4" />

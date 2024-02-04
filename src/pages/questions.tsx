@@ -4,6 +4,7 @@ import Link from "next/link";
 import { EyeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { convertDate } from "~/utils/convertDate";
 import { ChevronDoubleUpIcon } from "@heroicons/react/20/solid";
+import { QuestionForm } from "~/components/QuestionForm";
 
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
@@ -308,6 +309,8 @@ export default function Questions() {
       <div>
         <div>
           <h1>Questions</h1>
+          <QuestionForm />
+
           <div className="flex flex-col divide-y-2">
             {mockPosts.map((post, idx) => (
               <Link
