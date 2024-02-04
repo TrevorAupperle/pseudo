@@ -1,11 +1,9 @@
-import Head from "next/head";
-import rocket from "public/lotties/rocket.json";
 import Link from "next/link";
 import { EyeIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import { convertDate } from "~/utils/convertDate";
 import { ChevronDoubleUpIcon } from "@heroicons/react/20/solid";
 import { QuestionForm } from "~/components/QuestionForm";
-import { findPosts } from '../utils/api.js';
+import { findPosts } from "../utils/api.js";
 
 import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
@@ -33,27 +31,24 @@ export type Comment = {
 var posts = await findPosts(" ");
 var postsData = posts.data.data;
 
-const mockPosts: Post[] = []
+const mockPosts: Post[] = [];
 
-for (var i = 0; i < posts.data.data.length; i++)
-{
+for (var i = 0; i < posts.data.data.length; i++) {
   var postData = postsData[i];
 
-  mockPosts.push(
-    {
-        id: i,
-        title: postData.title,
-        body: postData.body,
-        author: postData.author,
-        datePublished: postData.datePublished,
-        dateLastModified: postData.dateLastModified,
-        impact: postData.impact,
-        views: postData.views,
-        tags: postData.tags,
-        communityForum: [],
-        professionalForum: [],
-      }
-  );
+  mockPosts.push({
+    id: i,
+    title: postData.title,
+    body: postData.body,
+    author: postData.author,
+    datePublished: postData.datePublished,
+    dateLastModified: postData.dateLastModified,
+    impact: postData.impact,
+    views: postData.views,
+    tags: postData.tags,
+    communityForum: [],
+    professionalForum: [],
+  });
 }
 
 export default function Questions() {

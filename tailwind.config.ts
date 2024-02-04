@@ -23,6 +23,8 @@ export default {
         "primaryBlue-900": "#00296B",
         primaryGreen: "#588157",
         "primaryGreen-900": "#344E41",
+        "primaryGreen-300": "#A3B18A",
+        "primaryGreen-100": "#DAD7CD",
       },
     },
   },

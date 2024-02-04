@@ -15,8 +15,8 @@ export const PostCard = ({
   setHoverId,
 }: {
   data: Post;
-  hoverId: string;
-  setHoverId: Dispatch<SetStateAction<string>>;
+  hoverId: number;
+  setHoverId: Dispatch<SetStateAction<number>>;
 }) => {
   return (
     <div>
@@ -26,7 +26,7 @@ export const PostCard = ({
           hoverId === data.id ? "bg-gray-100" : "bg-white",
         )}
         onMouseEnter={() => setHoverId(data.id)}
-        onMouseLeave={() => setHoverId("")}
+        onMouseLeave={() => setHoverId(-1)}
       >
         <Link href={`/post/${data.id}`} className="flex flex-col">
           <div className="font-semibold text-primaryBlue underline-offset-4 hover:underline">
@@ -52,11 +52,13 @@ export const PostCard = ({
             <div className="text-sm text-gray-500">
               {"posted " + convertDate(data.datePublished)}
             </div>
-            <div className="mt-[2px] h-1 w-1 rounded-full bg-gray-500" />
             {data.dateLastModified !== data.datePublished && (
-              <div className="text-sm text-gray-500">
-                {" edited " + convertDate(data.dateLastModified)}
-              </div>
+              <>
+                <div className="mt-[2px] h-1 w-1 rounded-full bg-gray-500" />
+                <div className="text-sm text-gray-500">
+                  {" edited " + convertDate(data.dateLastModified)}
+                </div>
+              </>
             )}
           </div>
           <div className="flex items-center gap-2">
@@ -67,8 +69,8 @@ export const PostCard = ({
               </div>
             </div>
             <div className="flex items-center gap-1">
-              <ChevronDoubleUpIcon className="text-primaryGreen h-4 w-4" />
-              <div className="text-primaryGreen text-sm">
+              <ChevronDoubleUpIcon className="h-4 w-4 text-primaryGreen" />
+              <div className="text-sm text-primaryGreen">
                 {data.impact + " impact"}
               </div>
             </div>

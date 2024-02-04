@@ -9,6 +9,7 @@ import { Fragment, useState } from "react";
 import classNames from "../utils/classNames";
 import { Transition } from "@headlessui/react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import Image from "next/image";
 
 export type NavbarSearchItem = {
   id: string;
@@ -164,7 +165,17 @@ export const Navbar = () => {
         </div>
         {user && (
           <Link href="/profile">
-            <UserCircleIcon className="h-8 w-8 text-primaryBlue" />
+            {user.picture ? (
+              <Image
+                src={user.picture}
+                alt="Profile"
+                className="cursor-pointer rounded-full border-primaryBlue hover:-ml-[1px] hover:-mr-[1px] hover:border"
+                width={40}
+                height={40}
+              />
+            ) : (
+              <UserCircleIcon className="h-10 w-10 text-primaryBlue" />
+            )}
           </Link>
         )}
         {!user && (

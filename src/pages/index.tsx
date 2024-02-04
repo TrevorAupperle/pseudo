@@ -6,11 +6,11 @@ import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { findPosts } from '../utils/api.js';
+import { findPosts } from "../utils/api.js";
 const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 export type Post = {
-  id: Number;
+  id: number;
   title: string;
   body: string;
   author: string;
@@ -32,31 +32,28 @@ export type Comment = {
 var posts = await findPosts(" ");
 var postsData = posts.data.data;
 
-const mockPosts: Post[] = []
+const mockPosts: Post[] = [];
 
-for (var i = 0; i < posts.data.data.length; i++)
-{
+for (var i = 0; i < posts.data.data.length; i++) {
   var postData = postsData[i];
 
-  mockPosts.push(
-    {
-        id: i,
-        title: postData.title,
-        body: postData.body,
-        author: postData.author,
-        datePublished: postData.datePublished,
-        dateLastModified: postData.dateLastModified,
-        impact: postData.impact,
-        views: postData.views,
-        tags: postData.tags,
-        communityForum: [],
-        professionalForum: [],
-      }
-  );
+  mockPosts.push({
+    id: i,
+    title: postData.title,
+    body: postData.body,
+    author: postData.author,
+    datePublished: postData.datePublished,
+    dateLastModified: postData.dateLastModified,
+    impact: postData.impact,
+    views: postData.views,
+    tags: postData.tags,
+    communityForum: [],
+    professionalForum: [],
+  });
 }
 
 export default function Home() {
-  const [hoverPostId, setHoverPostId] = useState<string>("");
+  const [hoverPostId, setHoverPostId] = useState<number>(-1);
 
   return (
     <>
@@ -114,15 +111,36 @@ export default function Home() {
           </div>
           <Link
             href="/questions"
-            className="border-primaryGreen-900 flex items-center gap-2 rounded-lg border bg-primaryGreen px-8 py-2 text-white shadow-sm"
+            className="flex items-center gap-2 rounded-lg border border-primaryGreen-900 bg-primaryGreen px-8 py-2 text-white shadow-sm"
           >
             <div>See more</div>
             <ArrowRightIcon className="h-4 w-4" />
           </Link>
         </div>
-        <div className="col-span-4 flex flex-col items-center">
-          <div className="w-full rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
+        <div className="col-span-4 flex flex-col items-center gap-2">
+          <div className="flex w-full flex-col gap-4 rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
             <h2 className="text-xl font-semibold">Platform Stats</h2>
+            <div className="grid grid-cols-6 items-center gap-2">
+              <h3 className="col-span-2 font-semibold">Questions:</h3>
+              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+                35
+              </div>
+            </div>
+            <div className="grid grid-cols-6 items-center gap-2">
+              <h3 className="col-span-2 font-semibold">Users:</h3>
+              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+                3
+              </div>
+            </div>
+            <div className="grid grid-cols-6 items-center gap-2">
+              <h3 className="col-span-2 font-semibold">Answers:</h3>
+              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+                22
+              </div>
+            </div>
+            <p className="text-lg font-semibold">
+              Start asking questions and get answers from the community!
+            </p>
           </div>
         </div>
       </div>

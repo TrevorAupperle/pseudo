@@ -1,45 +1,62 @@
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { CodeSnippet } from "../components/code-snippet";
 import { PageLayout } from "../components/page-layout";
-import { getUserInfo, createUser } from '../utils/api.js';
+import { getUserInfo, createUser } from "../utils/api.js";
+import { useEffect, useState } from "react";
 
-const Profile: NextPage = () => {
+type CreateUserData = {
+  success: boolean;
+  data: any;
+};
+
+const Profile = () => {
   const defaultPicture =
     "https://cdn.auth0.com/blog/hello-auth0/auth0-user.png";
   const { user } = useUser();
+  const [userData, setUserData] = useState<any[]>([]); // Update the type of userData to any[]
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const createOrGetUser = async () => {
+      // Move createOrGetUser inside the useEffect callback
+      if (!user) {
+        return null;
+      }
+
+      await createUser(user.sub, {})
+        .then(({ data }: { data: CreateUserData }) => {
+          if (data.success) {
+            console.log("User Created");
+          } else {
+            console.log("User Already Exists");
+          }
+          console.log(data);
+          return getUserInfo(user.sub);
+        })
+        .then(({ data }: { data: CreateUserData }) => {
+          console.log("data found");
+          setUserData(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    console.log("initting");
+    setLoading(true);
+    void createOrGetUser();
+    setLoading(false);
+  }, [user]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!user) {
     return null;
   }
-
-  //Get user information from Database
-
-  const [userData, setUserData] = React.useState([]);
-
-  React.useEffect(() => {
-    console.log('initting');
-    createUser(user.sub, {})
-        .then(({ data }) => {
-            if (data.success)
-            {
-              console.log("User Created");
-            } else {
-              console.log("User Already Exists");
-            }
-            console.log(data);
-            return getUserInfo(user.sub);
-        }).then(({ data }) => {
-          console.log('data found');
-          setUserData(data.data);
-        }).catch((err) => {
-            console.log(err);
-            window.location.href = '/'
-        });
-}, [])
 
   return (
     <PageLayout>
@@ -60,7 +77,7 @@ const Profile: NextPage = () => {
           <div className="profile-grid">
             <div className="profile__header">
               <Image
-                src={user.picture || defaultPicture}
+                src={user.picture ?? defaultPicture}
                 alt="Profile"
                 className="profile__avatar"
                 width={80}
