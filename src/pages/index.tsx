@@ -1,3 +1,38 @@
+// import { FormEvent } from "react";
+// import { useRouter } from "next/router";
+
+// export default function LoginPage() {
+//   const router = useRouter();
+
+//   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+//     event.preventDefault();
+
+//     const formData = new FormData(event.currentTarget);
+//     const email = formData.get("email");
+//     const password = formData.get("password");
+
+//     const response = await fetch("/api/auth/login", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({ email, password }),
+//     });
+
+//     if (response.ok) {
+//       router.push("/profile");
+//     } else {
+//       // Handle errors
+//     }
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input type="email" name="email" placeholder="Email" required />
+//       <input type="password" name="password" placeholder="Password" required />
+//       <button type="submit">Login</button>
+//     </form>
+//   );
+// }
+
 import Head from "next/head";
 import Link from "next/link";
 
@@ -15,6 +50,14 @@ export default function Home() {
             Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              href="/api/auth/login"
+              target="_blank"
+            >
+              <h3 className="text-2xl font-bold">Login</h3>
+            </Link>
+
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
               href="https://create.t3.gg/en/usage/first-steps"
