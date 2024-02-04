@@ -16,6 +16,31 @@ const Profile: NextPage = () => {
     return null;
   }
 
+  //Get user information from Database
+
+  const [userData, setUserData] = React.useState([]);
+
+  React.useEffect(() => {
+    console.log('initting');
+    createUser(user.sub, {})
+        .then(({ data }) => {
+            if (data.success)
+            {
+              console.log("User Created");
+            } else {
+              console.log("User Already Exists");
+            }
+            console.log(data);
+            return getUserInfo(user.sub);
+        }).then(({ data }) => {
+          console.log('data found');
+          setUserData(data.data);
+        }).catch((err) => {
+            console.log(err);
+            window.location.href = '/'
+        });
+}, [])
+
   return (
     <PageLayout>
       <div className="content-layout">
