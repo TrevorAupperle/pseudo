@@ -28,31 +28,35 @@ export type Comment = {
   author: string;
   datePosted: Date;
 };
-
-var posts = await findPosts(" ");
-var postsData = posts.data.data;
-
-const mockPosts: Post[] = [];
-
-for (var i = 0; i < posts.data.data.length; i++) {
-  var postData = postsData[i];
-
-  mockPosts.push({
-    id: i,
-    title: postData.title,
-    body: postData.body,
-    author: postData.author,
-    datePublished: postData.datePublished,
-    dateLastModified: postData.dateLastModified,
-    impact: postData.impact,
-    views: postData.views,
-    tags: postData.tags,
-    communityForum: [],
-    professionalForum: [],
-  });
-}
-
 export default function Home() {
+  // const findPostRequest = async () => {
+  //   const posts = await findPosts(" ");
+  //   setPosts(posts);
+  // };
+  // //ar posts = await findPosts(" ");
+  // const [posts, setPosts] = useState(findPostRequest ?? { data: { data: [] } });
+  // //var postsData = posts.data.data;
+
+  // const mockPosts: Post[] = [];
+
+  // for (var i = 0; i < posts.data.data.length; i++) {
+  //   var postData = postsData[i];
+
+  //   mockPosts.push({
+  //     id: i,
+  //     title: postData.title,
+  //     body: postData.body,
+  //     author: postData.author,
+  //     datePublished: postData.datePublished,
+  //     dateLastModified: postData.dateLastModified,
+  //     impact: postData.impact,
+  //     views: postData.views,
+  //     tags: postData.tags,
+  //     communityForum: [],
+  //     professionalForum: [],
+  //   });
+  // }
+
   const [hoverPostId, setHoverPostId] = useState<number>(-1);
 
   return (
@@ -99,14 +103,6 @@ export default function Home() {
           <div className="w-full rounded-lg border border-gray-200 bg-white px-6 py-4 shadow-sm">
             <h2 className="text-xl font-semibold">Top Questions</h2>
             <div className="flex flex-col divide-y-2">
-              {mockPosts.map((post, idx) => (
-                <PostCard
-                  key={idx}
-                  data={post}
-                  hoverId={hoverPostId}
-                  setHoverId={setHoverPostId}
-                />
-              ))}
             </div>
           </div>
           <Link
@@ -122,19 +118,19 @@ export default function Home() {
             <h2 className="text-xl font-semibold">Platform Stats</h2>
             <div className="grid grid-cols-6 items-center gap-2">
               <h3 className="col-span-2 font-semibold">Questions:</h3>
-              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+              <div className="col-span-4 rounded-lg border border-primaryGreen bg-primaryGreen-100 px-8 py-1 text-center">
                 35
               </div>
             </div>
             <div className="grid grid-cols-6 items-center gap-2">
               <h3 className="col-span-2 font-semibold">Users:</h3>
-              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+              <div className="col-span-4 rounded-lg border border-primaryGreen bg-primaryGreen-100 px-8 py-1 text-center">
                 3
               </div>
             </div>
             <div className="grid grid-cols-6 items-center gap-2">
               <h3 className="col-span-2 font-semibold">Answers:</h3>
-              <div className="bg-primaryGreen-100 col-span-4 rounded-lg border border-primaryGreen px-8 py-1 text-center">
+              <div className="col-span-4 rounded-lg border border-primaryGreen bg-primaryGreen-100 px-8 py-1 text-center">
                 22
               </div>
             </div>
